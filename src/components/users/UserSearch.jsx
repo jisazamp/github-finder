@@ -4,7 +4,7 @@ import GithubContext from '../../context/github/GithubContext';
 const UserSearch = () => {
   const [text, setText] = useState('');
 
-  const { users } = useContext(GithubContext);
+  const { users, searchUser, clearUsers } = useContext(GithubContext);
 
   const handleChange = (e) => setText(e.target.value);
 
@@ -14,7 +14,7 @@ const UserSearch = () => {
     if (text === '') {
       alert('Please enter something');
     } else {
-      // @todo - search users
+      searchUser(text);
 
       setText('');
     }
@@ -44,9 +44,11 @@ const UserSearch = () => {
           </div>
         </form>
       </div>
-      <div>
+      <div className='flex justify-center md:justify-start'>
         {users.length > 0 && (
-          <button className='btn btn-ghost btn-lg'>Clear</button>
+          <button onClick={clearUsers} className='btn btn-ghost btn-lg '>
+            Clear
+          </button>
         )}
       </div>
     </div>
